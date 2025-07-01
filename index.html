@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💌 Message Me</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 500px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      transition: 0.3s;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #66a6ff;
+      box-shadow: 0 0 10px #66a6ff50;
+    }
+
+    input[type="file"] {
+      background: #f9f9f9;
+      padding: 8px;
+    }
+
+    .file-upload {
+  display: block;
+  border: 2px dashed #a0d2eb;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  color: #444;
+  background: #f1f9ff;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.file-upload:hover {
+  background: #e0f4ff;
+  border-color: #4facfe;
+  color: #000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-name {
+  font-size: 14px;
+  color: #555;
+  margin-top: 8px;
+}
+
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>📩 Send Me a Message</h2>
+  <form id="contact-form">
+    <input type="text" name="{{from_name}}" placeholder="👤 Your Name" required />
+    <input type="email" name="{{reply_to}}" placeholder="📧 Your Email" required />
+    <textarea name="{{message}}" rows="4" placeholder="✍️ Write your message..." required></textarea>
+    <label class="file-upload">
+  <span>📎 Choose File</span>
+  <input type="file" name="attachment" id="attachment" onchange="showFileName()" />
+  <div id="file-name" class="file-name">No file chosen</div>
+</label>
+
+    <button type="submit">🚀 Send Message</button>
+  </form>
+  <div class="footer">Powered by EmailJS | © Sanju Bhai</div>
+</div>
+
+<script>
+  emailjs.init("nxwaPwuTUfX0V-Ymy"); // Replace with your EmailJS Public Key
+
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    function showFileName() {
+  const input = document.getElementById("attachment");
+  const fileNameDiv = document.getElementById("file-name");
+  fileNameDiv.textContent = input.files[0] ? input.files[0].name : "No file chosen";
+}
+
+
+    emailjs.sendForm("service_6c50wfi", "template_y96xgjp", this)
+      .then(function(response) {
+        alert("✅ Message sent successfully!");
+      }, function(error) {
+        alert("❌ Failed to send: " + JSON.stringify(error));
+      });
+  });
+</script>
+
+</body>
+</html>
