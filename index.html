@@ -132,10 +132,15 @@
 <div class="container">
   <h2>📩 Send Me a Message</h2>
   <form id="contact-form">
-    <input type="text" name="{{from_name}}" placeholder="👤 Your Name" required />
-    <input type="email" name="{{reply_to}}" placeholder="📧 Your Email" required />
-    <textarea name="{{message}}" rows="4" placeholder="✍️ Write your message..." required></textarea>
+    <input type="text" name="from_name" placeholder="👤 Your Name" required />
+    
+
+    
+    
+    <input type="email" name="user_email" placeholder="📧 Your Email" required /> 
+    <textarea type="text" name="message" rows="4" placeholder="✍️ Write your message..." required></textarea>
     <label class="file-upload">
+  
   <span>📎 Choose File</span>
   <input type="file" name="attachment" id="attachment" onchange="showFileName()" />
   <div id="file-name" class="file-name">No file chosen</div>
@@ -155,6 +160,7 @@
     function showFileName() {
   const input = document.getElementById("attachment");
   const fileNameDiv = document.getElementById("file-name");
+  const id = Document.getElementById
   fileNameDiv.textContent = input.files[0] ? input.files[0].name : "No file chosen";
 }
 
@@ -166,7 +172,21 @@
         alert("❌ Failed to send: " + JSON.stringify(error));
       });
   });
+
+
+
+  /*emailjs.send("service_6c50wfi","template_tcl6e74",{
+title: "sushil",
+name: "sushil",
+form_name: "sushil kumar",
+reply_to: "sanju",
+message: "hello",
+email: "bck299172@gmail.com",
+});
+*/
 </script>
 
 </body>
 </html>
+
+
